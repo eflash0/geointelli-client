@@ -1,0 +1,28 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* prevents overflow outside screen */
+}
+
+.dialog-content {
+  overflow-y: auto;
+  max-height: 70vh;
+  padding-right: 8px;
+}
+
+/* spinner center */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* spacing between cards */
+.section {
+  margin-bottom: 16px;
+}
+
+/* table scroll */
+.table-container {
+  overflow-x: auto;
+}

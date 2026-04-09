@@ -1,0 +1,71 @@
+/* Full-screen map styling */
+#map {
+  height: 100vh;  /* Full screen height */
+  width: 100%;    /* Full screen width */
+}
+
+/* Full-screen map styling */
+
+
+/* Custom style for the default Leaflet control panel */
+.leaflet-control.layertools {
+  background-color: rgba(255, 255, 255, 0.9) !important;  /* Slightly transparent background */
+  border-radius: 8px !important;  /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;  /* Subtle shadow */
+  padding: 10px 15px !important;  /* Padding inside the control */
+  font-family: 'Arial', sans-serif !important;  /* Use Arial font */
+  z-index: 1000 !important;  /* Ensure control is on top of map */
+  font-size: 14px !important;  /* Adjust font size */
+}
+
+/* Toggle button styling */
+.custom-layer-toggle {
+  background-color: #007bff !important;  /* Blue background */
+  color: white !important;  /* White text */
+  border-radius: 5px !important;  /* Rounded corners */
+  padding: 8px 12px !important;  /* Padding around text */
+  cursor: pointer !important;  /* Cursor changes to pointer */
+  border: none !important;  /* Remove border */
+  margin-bottom: 10px !important;  /* Space between button and list */
+  font-weight: bold !important;  /* Bold text */
+  text-align: center !important;  /* Center text */
+  display: block !important;  /* Block-level for layout */
+  width: 100%; /* Make button stretch full width */
+}
+
+/* Hover effect for the toggle button */
+.custom-layer-toggle:hover {
+  background-color: #0056b3 !important;  /* Darker blue on hover */
+}
+
+/* Styling for the layer list items */
+.custom-layer-list {
+  list-style: none !important;  /* Remove bullet points */
+  margin: 0 !important;  /* Remove margin */
+  padding: 0 !important;  /* Remove padding */
+  max-height: 200px;  /* Limit height for scrolling */
+  overflow-y: auto;  /* Enable scrolling */
+}
+
+/* Label for each layer control */
+.custom-layer-item {
+  cursor: pointer !important;  /* Pointer on hover */
+  display: block !important;  /* Block display to separate items */
+  padding: 8px !important;  /* Padding for clickable area */
+  margin: 5px 0 !important;  /* Space between items */
+  font-size: 14px !important;  /* Font size */
+  background-color: #f9f9f9 !important;  /* Light grey background */
+  border-radius: 5px !important;  /* Rounded corners */
+  transition: background-color 0.3s ease !important;  /* Smooth hover transition */
+}
+
+/* Hover effect on labels */
+.custom-layer-item:hover {
+  background-color: #007bff !important;  /* Blue background on hover */
+  color: white !important;  /* White text on hover */
+}
+
+/* Radio button styling inside layers */
+.custom-layer-item input[type="radio"] {
+  margin-right: 10px !important;  /* Space between radio and label */
+}
