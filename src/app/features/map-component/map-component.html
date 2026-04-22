@@ -8,25 +8,19 @@
 }
 
 <header class="rise-in fixed left-5 right-5 top-4 z-[1200] flex items-center justify-between rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/85 px-4 py-3 text-white backdrop-blur-sm">
-  
-  <!-- Logo + Title -->
-  <div class="flex items-center gap-3">
-    <!-- Logo -->
-    <img src="assets/images/logo_.png" alt="Logo" class="h-10 w-auto" />
-  
-    <!-- Text block -->
+
+  <div class="flex items-center gap-1">
+    <img src="../../../assets/images/logo_.png" alt="Logo" class="h-10 w-auto" />
     <div class="grid">
       <strong class="brand-glow bg-gradient-to-r from-[#9edff1] via-[#c7b6ef] to-[#a6e6d0] bg-clip-text text-transparent">
         GEOZENTRA
       </strong>
-  
       <span class="text-[13px] text-[#c7d5f6]">
         Intelligent Real Estate
       </span>
     </div>
   </div>
 
-  <!-- Right Menu -->
   <div class="relative flex items-center gap-2.5">
     <p class="m-0 hidden text-sm sm:block">
       Hi, {{ currentUserName }}
@@ -49,34 +43,50 @@
       [class.scale-100]="menuOpen"
       [class.translate-y-0]="menuOpen">
 
+      <!-- Layers -->
       <button
         type="button"
         (click)="toggleLayers(); menuOpen = false"
-        class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#c7d5f6] transition hover:bg-[#9edff1]/12">
-        <span class="mr-2">🗺</span>
-        {{ layersOpen ? 'Hide layers panel' : 'Show layers panel' }}
+        class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#c7d5f6] text-left transition hover:bg-[#9edff1]/12">
+
+        <span class="w-6 text-center">🗺</span>
+        <span>{{ layersOpen ? 'Hide layers panel' : 'Show layers panel' }}</span>
       </button>
 
+      <!-- Reset -->
       <button
         type="button"
         (click)="resetView()"
-        class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#9edff1] transition hover:bg-[#9edff1]/12">
-        <span class="mr-2">◎</span>
-        Reset map view
+        class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#9edff1] text-left transition hover:bg-[#9edff1]/12">
+
+        <span class="w-6 text-center">◎</span>
+        <span>Reset map view</span>
       </button>
 
+      <!-- About -->
+      <button
+        type="button"
+        (click)="openAbout()"
+        class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#c7b6ef] text-left transition hover:bg-[#c7b6ef]/12">
+
+        <span class="w-6 text-center text-[#c7b6ef]">ℹ</span>
+        <span>About GEOZENTRA</span>
+      </button>
+
+      <!-- Logout -->
       <button
         type="button"
         (click)="logout()"
-        class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#f2d7bd] transition hover:bg-[#f2d7bd]/12">
-        <span class="mr-2">↳</span>
-        Logout
+        class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#f2d7bd] text-left transition hover:bg-[#f2d7bd]/12">
+
+        <span class="w-6 text-center">↳</span>
+        <span>Logout</span>
       </button>
+
     </div>
   </div>
 </header>
 
-<!-- Layers Toggle Button -->
 <button
   type="button"
   (click)="toggleLayers()"
@@ -84,7 +94,6 @@
   {{ layersOpen ? 'Close Layers' : 'Open Layers' }}
 </button>
 
-<!-- Layers Panel -->
 <aside
   class="fixed bottom-20 left-5 z-[1100] w-60 rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/92 p-3 text-white shadow-xl backdrop-blur-sm transition-all duration-300"
   [class.pointer-events-none]="!layersOpen"
@@ -136,5 +145,4 @@
   </p>
 </aside>
 
-<!-- Map -->
 <div id="map" class="h-screen w-full"></div>

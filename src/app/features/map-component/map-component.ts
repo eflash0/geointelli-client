@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./map-component.css'],
 })
 export class MapComponent implements AfterViewInit, OnDestroy {
+
   private map!: L.Map;
   private geoJsonLayer!: L.GeoJSON;
   private selectedLayer: any;
@@ -42,7 +43,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   get currentUserName(): string {
-    return this.authService.user().user?.fullName ?? 'Analyst';
+    return this.authService.user().user?.fullName ?? 'User';
   }
 
   logout(): void {
@@ -65,6 +66,9 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   toggleLayers(): void {
     this.layersOpen = !this.layersOpen;
+  }
+
+  openAbout(): void {
   }
 
   closeOverlays(): void {
