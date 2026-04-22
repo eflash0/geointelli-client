@@ -71,3 +71,41 @@ body {
     transform: translateY(0) scale(1);
   }
 }
+
+/* Target your existing button */
+.menu-trigger {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light sweep effect */
+.menu-trigger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+/* Trigger on hover */
+.menu-trigger:hover::before {
+  animation: shine 0.9s ease forwards;
+}
+
+/* Animation keyframes */
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}

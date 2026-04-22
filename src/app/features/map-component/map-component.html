@@ -1,1 +1,140 @@
-@if (menuOpen || layersOpen) { <button aria-label="Close overlays" class="fixed inset-0 z-[1050] bg-black/10 backdrop-blur-[1px]" type="button" (click)="closeOverlays()"> </button> } <header class="rise-in fixed left-5 right-5 top-4 z-[1200] flex items-center justify-between rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/85 px-4 py-3 text-white backdrop-blur-sm"> <div class="grid"> <strong class="brand-glow bg-gradient-to-r from-[#9edff1] via-[#c7b6ef] to-[#a6e6d0] bg-clip-text text-transparent">GEOZENTRA</strong> <span class="text-[13px] text-[#c7d5f6]">Intelligent Real Estate</span> </div> <div class="relative flex items-center gap-2.5"> <p class="m-0 hidden text-sm sm:block">Hi, {{ currentUserName }}</p> <button type="button" (click)="toggleMenu()" class="menu-trigger cursor-pointer rounded-lg bg-gradient-to-r from-[#9edff1] to-[#c7b6ef] px-3 py-2 text-sm font-semibold text-[#111936] shadow-lg shadow-slate-900/25 transition hover:brightness-105"> <span class="mr-1.5">✦</span> Menu </button> <div class="menu-panel absolute right-0 top-12 w-56 origin-top-right rounded-xl border border-[#9edff1]/35 bg-[#1a2140]/95 p-1.5 shadow-2xl shadow-slate-950/70 transition-all duration-200" [class.pointer-events-none]="!menuOpen" [class.scale-95]="!menuOpen" [class.opacity-0]="!menuOpen" [class.translate-y-1]="!menuOpen" [class.opacity-100]="menuOpen" [class.scale-100]="menuOpen" [class.translate-y-0]="menuOpen"> <button type="button" (click)="toggleLayers(); menuOpen = false" class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#c7d5f6] transition hover:bg-[#9edff1]/12"> <span class="mr-2">🗺</span> {{ layersOpen ? 'Hide layers panel' : 'Show layers panel' }} </button> <button type="button" (click)="resetView()" class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#9edff1] transition hover:bg-[#9edff1]/12"> <span class="mr-2">◎</span> Reset map view </button> <button type="button" (click)="logout()" class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#f2d7bd] transition hover:bg-[#f2d7bd]/12"> <span class="mr-2">↳</span> Logout </button> </div> </div> </header> <button type="button" (click)="toggleLayers()" class="rise-in fixed bottom-5 left-5 z-[1200] rounded-xl border border-[#9edff1]/35 bg-[#141b34]/90 px-4 py-2.5 text-sm font-semibold text-[#c7d5f6] shadow-lg shadow-black/40 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-[#1d274d]"> {{ layersOpen ? 'Close Layers' : 'Open Layers' }} </button> <aside class="fixed bottom-20 left-5 z-[1100] w-60 rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/92 p-3 text-white shadow-xl backdrop-blur-sm transition-all duration-300" [class.pointer-events-none]="!layersOpen" [class.opacity-0]="!layersOpen" [class.translate-y-3]="!layersOpen" [class.scale-95]="!layersOpen" [class.opacity-100]="layersOpen" [class.translate-y-0]="layersOpen" [class.scale-100]="layersOpen"> <p class="mb-2 text-xs uppercase tracking-wider text-[#c7d5f6]">Base Layers</p> <div class="grid gap-2"> <button type="button" (click)="setBaseLayer('satellite')" class="rounded-lg px-3 py-2 text-left text-sm transition" [class.bg-violet-200]="activeBaseLayer === 'satellite'" [class.text-slate-900]="activeBaseLayer === 'satellite'" [class.bg-violet-200/15]="activeBaseLayer !== 'satellite'"> Satellite </button> <button type="button" (click)="setBaseLayer('street')" class="rounded-lg px-3 py-2 text-left text-sm transition" [class.bg-sky-200]="activeBaseLayer === 'street'" [class.text-slate-900]="activeBaseLayer === 'street'" [class.bg-sky-200/15]="activeBaseLayer !== 'street'"> Street </button> <button type="button" (click)="setBaseLayer('terrain')" class="rounded-lg px-3 py-2 text-left text-sm transition" [class.bg-emerald-200]="activeBaseLayer === 'terrain'" [class.text-slate-900]="activeBaseLayer === 'terrain'" [class.bg-emerald-200/15]="activeBaseLayer !== 'terrain'"> Terrain </button> </div> <p class="mt-3 text-xs text-[#c7d5f6]/75">Parcel boundaries appear from zoom level {{ parcelZoomThreshold }} and above.</p> </aside> <div id="map" class="h-screen w-full"></div>
+@if (menuOpen || layersOpen) {
+  <button
+    aria-label="Close overlays"
+    class="fixed inset-0 z-[1050] bg-black/10 backdrop-blur-[1px]"
+    type="button"
+    (click)="closeOverlays()">
+  </button>
+}
+
+<header class="rise-in fixed left-5 right-5 top-4 z-[1200] flex items-center justify-between rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/85 px-4 py-3 text-white backdrop-blur-sm">
+  
+  <!-- Logo + Title -->
+  <div class="flex items-center gap-3">
+    <!-- Logo -->
+    <img src="assets/images/logo_.png" alt="Logo" class="h-10 w-auto" />
+  
+    <!-- Text block -->
+    <div class="grid">
+      <strong class="brand-glow bg-gradient-to-r from-[#9edff1] via-[#c7b6ef] to-[#a6e6d0] bg-clip-text text-transparent">
+        GEOZENTRA
+      </strong>
+  
+      <span class="text-[13px] text-[#c7d5f6]">
+        Intelligent Real Estate
+      </span>
+    </div>
+  </div>
+
+  <!-- Right Menu -->
+  <div class="relative flex items-center gap-2.5">
+    <p class="m-0 hidden text-sm sm:block">
+      Hi, {{ currentUserName }}
+    </p>
+
+    <button
+      type="button"
+      (click)="toggleMenu()"
+      class="menu-trigger cursor-pointer rounded-lg bg-gradient-to-r from-[#9edff1] to-[#c7b6ef] px-3 py-2 text-sm font-semibold text-[#111936] shadow-lg shadow-slate-900/25 transition hover:brightness-105">
+      <span class="mr-1.5">✦</span> Menu
+    </button>
+
+    <div
+      class="menu-panel absolute right-0 top-12 w-56 origin-top-right rounded-xl border border-[#9edff1]/35 bg-[#1a2140]/95 p-1.5 shadow-2xl shadow-slate-950/70 transition-all duration-200"
+      [class.pointer-events-none]="!menuOpen"
+      [class.scale-95]="!menuOpen"
+      [class.opacity-0]="!menuOpen"
+      [class.translate-y-1]="!menuOpen"
+      [class.opacity-100]="menuOpen"
+      [class.scale-100]="menuOpen"
+      [class.translate-y-0]="menuOpen">
+
+      <button
+        type="button"
+        (click)="toggleLayers(); menuOpen = false"
+        class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#c7d5f6] transition hover:bg-[#9edff1]/12">
+        <span class="mr-2">🗺</span>
+        {{ layersOpen ? 'Hide layers panel' : 'Show layers panel' }}
+      </button>
+
+      <button
+        type="button"
+        (click)="resetView()"
+        class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#9edff1] transition hover:bg-[#9edff1]/12">
+        <span class="mr-2">◎</span>
+        Reset map view
+      </button>
+
+      <button
+        type="button"
+        (click)="logout()"
+        class="menu-item-fancy w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-[#f2d7bd] transition hover:bg-[#f2d7bd]/12">
+        <span class="mr-2">↳</span>
+        Logout
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Layers Toggle Button -->
+<button
+  type="button"
+  (click)="toggleLayers()"
+  class="rise-in fixed bottom-5 left-5 z-[1200] rounded-xl border border-[#9edff1]/35 bg-[#141b34]/90 px-4 py-2.5 text-sm font-semibold text-[#c7d5f6] shadow-lg shadow-black/40 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-[#1d274d]">
+  {{ layersOpen ? 'Close Layers' : 'Open Layers' }}
+</button>
+
+<!-- Layers Panel -->
+<aside
+  class="fixed bottom-20 left-5 z-[1100] w-60 rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/92 p-3 text-white shadow-xl backdrop-blur-sm transition-all duration-300"
+  [class.pointer-events-none]="!layersOpen"
+  [class.opacity-0]="!layersOpen"
+  [class.translate-y-3]="!layersOpen"
+  [class.scale-95]="!layersOpen"
+  [class.opacity-100]="layersOpen"
+  [class.translate-y-0]="layersOpen"
+  [class.scale-100]="layersOpen">
+
+  <p class="mb-2 text-xs uppercase tracking-wider text-[#c7d5f6]">
+    Base Layers
+  </p>
+
+  <div class="grid gap-2">
+    <button
+      type="button"
+      (click)="setBaseLayer('satellite')"
+      class="rounded-lg px-3 py-2 text-left text-sm transition"
+      [class.bg-violet-200]="activeBaseLayer === 'satellite'"
+      [class.text-slate-900]="activeBaseLayer === 'satellite'"
+      [class.bg-violet-200/15]="activeBaseLayer !== 'satellite'">
+      Satellite
+    </button>
+
+    <button
+      type="button"
+      (click)="setBaseLayer('street')"
+      class="rounded-lg px-3 py-2 text-left text-sm transition"
+      [class.bg-sky-200]="activeBaseLayer === 'street'"
+      [class.text-slate-900]="activeBaseLayer === 'street'"
+      [class.bg-sky-200/15]="activeBaseLayer !== 'street'">
+      Street
+    </button>
+
+    <button
+      type="button"
+      (click)="setBaseLayer('terrain')"
+      class="rounded-lg px-3 py-2 text-left text-sm transition"
+      [class.bg-emerald-200]="activeBaseLayer === 'terrain'"
+      [class.text-slate-900]="activeBaseLayer === 'terrain'"
+      [class.bg-emerald-200/15]="activeBaseLayer !== 'terrain'">
+      Terrain
+    </button>
+  </div>
+
+  <p class="mt-3 text-xs text-[#c7d5f6]/75">
+    Parcel boundaries appear from zoom level {{ parcelZoomThreshold }} and above.
+  </p>
+</aside>
+
+<!-- Map -->
+<div id="map" class="h-screen w-full"></div>
