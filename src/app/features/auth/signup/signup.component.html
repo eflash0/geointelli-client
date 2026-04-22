@@ -1,0 +1,57 @@
+<main class="relative grid min-h-screen place-items-center overflow-hidden bg-[#090d1a] px-6 py-10 text-white">
+  <div class="float-soft pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#c7b6ef]/35 blur-3xl"></div>
+  <div class="float-soft-delayed pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-[#9edff1]/35 blur-3xl"></div>
+
+  <section class="rise-in relative z-10 grid w-full max-w-5xl overflow-hidden rounded-3xl border border-white/20 bg-white/10 shadow-2xl backdrop-blur-xl md:grid-cols-2">
+    <aside class="hidden md:flex flex-col justify-between bg-gradient-to-br from-[#9edff1]/70 via-[#c7b6ef]/70 to-[#a6e6d0]/70 p-8 text-[#101429]">
+      <div>
+        <p class="text-xs uppercase tracking-[0.35em] text-[#1b2242]/80">GEOZENTRA</p>
+        <h2 class="mt-4 text-3xl font-semibold leading-tight">Spatial Intelligence for Modern Real Estate Teams</h2>
+      </div>
+      <p class="text-sm text-[#1b2242]/80">Monitor parcels, evaluate opportunities, and collaborate in one secure workspace.</p>
+    </aside>
+
+    <div class="bg-[#f7fbff] px-7 py-8 text-[#1b2242] sm:px-10 sm:py-10">
+      <h1 class="text-3xl font-bold">Create account</h1>
+      <p class="mt-2 text-sm text-[#4b5a86]">Join the workspace and start exploring richer location insights.</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-6 grid gap-4">
+        <label class="grid gap-2">
+          <span class="text-sm font-medium text-[#4b5a86]">Full name</span>
+          <input type="text" formControlName="fullName" placeholder="Jane Doe" class="rounded-xl border border-[#d3dcf0] bg-white px-3 py-3 text-[15px] outline-none transition focus:border-[#8dcde0] focus:ring-4 focus:ring-[#d5f0f8]" />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="text-sm font-medium text-[#4b5a86]">Email</span>
+          <input type="email" formControlName="email" placeholder="you@example.com" class="rounded-xl border border-[#d3dcf0] bg-white px-3 py-3 text-[15px] outline-none transition focus:border-[#8dcde0] focus:ring-4 focus:ring-[#d5f0f8]" />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="text-sm font-medium text-[#4b5a86]">Password</span>
+          <input type="password" formControlName="password" placeholder="Create a password" class="rounded-xl border border-[#d3dcf0] bg-white px-3 py-3 text-[15px] outline-none transition focus:border-[#8dcde0] focus:ring-4 focus:ring-[#d5f0f8]" />
+        </label>
+
+        @if (submitError()) {
+          <p class="m-0 text-sm font-medium text-red-600">{{ submitError() }}</p>
+        }
+
+        <button type="submit" [disabled]="isSubmitting()" class="mt-1 rounded-xl bg-gradient-to-r from-[#8dcde0] to-[#bca8e9] px-4 py-3 text-sm font-semibold text-[#111936] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60">
+          Create account
+        </button>
+      </form>
+
+      <div class="relative my-5 text-center before:absolute before:left-0 before:right-0 before:top-1/2 before:border-t before:border-[#dbe5f6]">
+        <span class="relative bg-[#f7fbff] px-3 text-xs uppercase tracking-wider text-[#6d7ca8]">or continue with</span>
+      </div>
+
+      <button type="button" class="w-full rounded-xl border border-[#d3dcf0] bg-white px-4 py-3 text-sm font-semibold text-[#1b2242] transition hover:bg-[#f4f8ff]" (click)="signUpWithGoogle()">
+        Google
+      </button>
+
+      <p class="mt-6 text-center text-sm text-[#58658f]">
+        Already have an account?
+        <a routerLink="/login" class="font-semibold text-[#7e70c0] no-underline">Sign in</a>
+      </p>
+    </div>
+  </section>
+</main>

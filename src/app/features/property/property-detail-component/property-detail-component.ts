@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-property-detail-component',
@@ -18,7 +19,8 @@ import { MatTableModule } from '@angular/material/table';
   MatListModule,
   MatDividerModule,
   MatProgressSpinnerModule,
-  MatTableModule
+  MatTableModule,
+  MatButtonModule
   ],
   templateUrl: './property-detail-component.html',
   styleUrl: './property-detail-component.css',

@@ -1,14 +1,11 @@
 <div class="dialog-container">
-
   @if (loading) {
     <div class="loading-container">
-      <mat-spinner></mat-spinner>
+      <mat-spinner [diameter]="34" [strokeWidth]="4"></mat-spinner>
+      <p class="loading-label">Loading property details...</p>
     </div>
   } @else {
-
-    <h2 mat-dialog-title>
-      Property Details
-    </h2>
+    <h2 mat-dialog-title class="dialog-title">Property Details</h2>
 
     <mat-dialog-content class="dialog-content">
 
@@ -112,10 +109,8 @@
 
     </mat-dialog-content>
 
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Close</button>
+    <mat-dialog-actions align="end" class="dialog-actions">
+      <button mat-flat-button mat-dialog-close color="primary">Close</button>
     </mat-dialog-actions>
-
   }
-
 </div>

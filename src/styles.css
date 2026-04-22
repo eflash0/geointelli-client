@@ -1,3 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+:root {
+  --surface-dark: #0b1120;
+  --surface-dark-2: #141b34;
+  --line-dark: #3f4a72;
+  --accent-lavender: #c7b6ef;
+  --accent-sky: #9edff1;
+  --accent-mint: #a6e6d0;
+  --accent-peach: #f2d7bd;
+}
+
+html,
+body {
+  background: radial-gradient(circle at top, #1a2140, #090d1a 58%);
+  color: #e2e8f0;
+}
+
+.brand-glow {
+  animation: brandGlow 4.5s ease-in-out infinite;
+}
+
+.float-soft {
+  animation: floatSoft 7s ease-in-out infinite;
+}
+
+.float-soft-delayed {
+  animation: floatSoft 8.5s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+.rise-in {
+  animation: riseIn 0.7s ease-out;
+}
+
+.property-detail-dialog-panel .mat-mdc-dialog-surface {
+  border-radius: 18px !important;
+  border: 1px solid rgba(158, 223, 241, 0.35) !important;
+  background: linear-gradient(160deg, #0b1120 0%, #141b34 52%, #22264b 100%) !important;
+  box-shadow: 0 28px 60px rgba(2, 6, 23, 0.75) !important;
+  color: #e2e8f0 !important;
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes brandGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 0 rgba(158, 223, 241, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(199, 182, 239, 0.45));
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
