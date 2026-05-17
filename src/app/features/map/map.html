@@ -7,9 +7,10 @@
   </button>
 }
 
-<header class="rise-in fixed left-5 right-5 top-4 z-[1200] flex items-center justify-between rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/85 px-4 py-3 text-white backdrop-blur-sm">
+<header class="rise-in fixed left-5 right-5 top-4 z-[1200] flex items-center justify-between gap-4 rounded-2xl border border-[#9edff1]/35 bg-[#141b34]/85 px-4 py-3 text-white backdrop-blur-sm">
 
-  <div class="flex items-center gap-1">
+  <!-- Logo -->
+  <div class="flex flex-shrink-0 items-center gap-1">
     <img src="../../../assets/images/logo_.png" alt="Logo" class="h-10 w-auto" />
     <div class="grid">
       <strong class="brand-glow bg-gradient-to-r from-[#9edff1] via-[#c7b6ef] to-[#a6e6d0] bg-clip-text text-transparent">
@@ -21,7 +22,13 @@
     </div>
   </div>
 
-  <div class="relative flex items-center gap-2.5">
+  <!-- Search bar — grows to fill space between logo and menu -->
+  <div class="flex-1 max-w-[420px]">
+    <app-search-bar (search)="onSearch($event)" />
+  </div>
+
+  <!-- Menu -->
+  <div class="relative flex flex-shrink-0 items-center gap-2.5">
     <p class="m-0 hidden text-sm sm:block">
       Hi, {{ currentUserName }}
     </p>
@@ -43,50 +50,42 @@
       [class.scale-100]="menuOpen"
       [class.translate-y-0]="menuOpen">
 
-      <!-- Layers -->
       <button
         type="button"
         (click)="toggleLayers(); menuOpen = false"
         class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#c7d5f6] text-left transition hover:bg-[#9edff1]/12">
-
         <span class="w-6 text-center">🗺</span>
         <span>{{ layersOpen ? 'Hide layers panel' : 'Show layers panel' }}</span>
       </button>
 
-      <!-- Reset -->
       <button
         type="button"
         (click)="resetView()"
         class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#9edff1] text-left transition hover:bg-[#9edff1]/12">
-
         <span class="w-6 text-center">◎</span>
         <span>Reset map view</span>
       </button>
 
-      <!-- About -->
       <button
         type="button"
         (click)="openAbout()"
         class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#c7b6ef] text-left transition hover:bg-[#c7b6ef]/12">
-
         <span class="w-6 text-center text-[#c7b6ef]">ℹ</span>
         <span>About GEOZENTRA</span>
       </button>
 
-      <!-- Logout -->
       <button
         type="button"
         (click)="logout()"
         class="menu-item-fancy w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#f2d7bd] text-left transition hover:bg-[#f2d7bd]/12">
-
         <span class="w-6 text-center">↳</span>
         <span>Logout</span>
       </button>
-
     </div>
   </div>
 </header>
 
+<!-- rest of your template unchanged -->
 <button
   type="button"
   (click)="toggleLayers()"
@@ -104,34 +103,24 @@
   [class.translate-y-0]="layersOpen"
   [class.scale-100]="layersOpen">
 
-  <p class="mb-2 text-xs uppercase tracking-wider text-[#c7d5f6]">
-    Base Layers
-  </p>
+  <p class="mb-2 text-xs uppercase tracking-wider text-[#c7d5f6]">Base Layers</p>
 
   <div class="grid gap-2">
-    <button
-      type="button"
-      (click)="setBaseLayer('satellite')"
+    <button type="button" (click)="setBaseLayer('satellite')"
       class="rounded-lg px-3 py-2 text-left text-sm transition"
       [class.bg-violet-200]="activeBaseLayer === 'satellite'"
       [class.text-slate-900]="activeBaseLayer === 'satellite'"
       [class.bg-violet-200/15]="activeBaseLayer !== 'satellite'">
       Satellite
     </button>
-
-    <button
-      type="button"
-      (click)="setBaseLayer('street')"
+    <button type="button" (click)="setBaseLayer('street')"
       class="rounded-lg px-3 py-2 text-left text-sm transition"
       [class.bg-sky-200]="activeBaseLayer === 'street'"
       [class.text-slate-900]="activeBaseLayer === 'street'"
       [class.bg-sky-200/15]="activeBaseLayer !== 'street'">
       Street
     </button>
-
-    <button
-      type="button"
-      (click)="setBaseLayer('terrain')"
+    <button type="button" (click)="setBaseLayer('terrain')"
       class="rounded-lg px-3 py-2 text-left text-sm transition"
       [class.bg-emerald-200]="activeBaseLayer === 'terrain'"
       [class.text-slate-900]="activeBaseLayer === 'terrain'"
