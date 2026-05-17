@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Parcel } from '../../models/parcel';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import fo from '@angular/common/locales/fo';
 
 @Injectable({ providedIn: 'root' })
 export class ParcelService {
@@ -14,5 +15,10 @@ export class ParcelService {
     const params = new HttpParams().set('bbox', bbox);
   
     return this.http.get<Parcel[]>(this.baseUrl, { params });
+  }
+
+  getParcelByFolio(folio: string): Observable<Parcel>{
+    const params = new HttpParams().set('folio', folio);
+    return this.http.get<Parcel>(this.baseUrl+'/byfolio', { params })
   }
 }

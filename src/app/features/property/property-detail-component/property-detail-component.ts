@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
-import { PropertyService } from '../../../core/services/property-service';
+import { PropertyService } from '../../../core/services/property.service';
 import { Property } from '../../../models/property';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';

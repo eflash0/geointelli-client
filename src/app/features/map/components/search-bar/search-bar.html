@@ -1,0 +1,69 @@
+<div class="relative flex flex-col gap-2">
+
+  <div class="flex items-center gap-0 overflow-hidden rounded-xl border border-[#9edff1]/25 bg-white/7">
+
+    <div class="flex border-r border-[#9edff1]/20">
+      <button
+        type="button"
+        (click)="switchMode('folio')"
+        [class]="mode === 'folio'
+          ? 'px-3 py-2 text-xs font-semibold text-[#111936] bg-gradient-to-r from-[#9edff1] to-[#c7b6ef] transition-all'
+          : 'px-3 py-2 text-xs text-[#c7d5f6] hover:bg-white/5 transition-all'">
+        Folio
+      </button>
+      <button
+        type="button"
+        (click)="switchMode('address')"
+        [class]="mode === 'address'
+          ? 'px-3 py-2 text-xs font-semibold text-[#111936] bg-gradient-to-r from-[#9edff1] to-[#c7b6ef] transition-all'
+          : 'px-3 py-2 text-xs text-[#c7d5f6] hover:bg-white/5 transition-all'">
+        Address
+      </button>
+    </div>
+
+    <!-- Input -->
+    <div class="relative flex-1">
+      <input
+        type="text"
+        [(ngModel)]="value"
+        [placeholder]="placeholder"
+        (input)="onInput()"
+        (keydown.enter)="submit()"
+        (keydown.escape)="showSuggestions = false"
+        (blur)="showSuggestions = false"
+        class="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-[#c7d5f6]/50 outline-none"
+      />
+      <button
+        *ngIf="value"
+        type="button"
+        aria-label="Clear"
+        (click)="clear()"
+        class="absolute right-2 top-1/2 -translate-y-1/2 text-[#c7d5f6]/50 hover:text-white text-xs transition">
+        ✕
+      </button>
+    </div>
+
+    <button
+      type="button"
+      (click)="submit()"
+      [disabled]="!value.trim()"
+      class="m-1 rounded-lg bg-gradient-to-r from-[#9edff1] to-[#c7b6ef] px-4 py-1.5 text-xs font-semibold text-[#111936] transition hover:brightness-105 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap">
+      Search
+    </button>
+  </div>
+
+  @if (showSuggestions) {
+    <div class="absolute left-0 right-0 top-full z-[1300] mt-1 overflow-hidden rounded-xl border border-[#9edff1]/25 bg-[#141b34]/98 shadow-2xl shadow-black/50 backdrop-blur-sm">
+      @for (s of suggestions; track s) {
+        <button
+          type="button"
+          (mousedown)="selectSuggestion(s)"
+          class="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-[#c7d5f6] transition hover:bg-[#9edff1]/10 hover:text-white">
+          <span class="text-[#9edff1]/60 text-xs">📍</span>
+          {{ s }}
+        </button>
+      }
+    </div>
+  }
+
+</div>
